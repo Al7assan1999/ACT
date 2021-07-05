@@ -1,4 +1,5 @@
-﻿using ACT.DeviceGroups;
+﻿using ACT.Categories;
+using ACT.DeviceGroups;
 using ACT.Devices;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp;
@@ -34,6 +35,13 @@ namespace ACT.EntityFrameworkCore
                     .HasMaxLength(DeviceGroupConsts.MaxNameLength);
 
                 b.HasIndex(x => x.Name);
+            });
+
+            builder.Entity<Category>(b =>
+            {
+                b.ToTable(ACTConsts.DbTablePrefix + "Categories", ACTConsts.DbSchema);
+                b.ConfigureByConvention(); //auto configure for the base class props
+                //...
             });
         }
     }
